@@ -1,0 +1,63 @@
+{
+  "data": {
+    "metrics": [
+      {
+        "name": "heart_rate",
+        "units": "count/min",
+        "data": [
+          {"date": "2026-03-14 00:00:04 +0000", "Avg": 59, "Min": 55, "Max": 64, "source": "Simon's Apple Watch", "start": "2026-03-14 00:00:04 +0000", "end": "2026-03-14 01:00:00 +0000"},
+          {"date": "2026-03-14 01:00:00 +0000", "Avg": 62, "Min": 57, "Max": 70, "source": "Simon's Apple Watch", "start": "2026-03-14 01:00:00 +0000", "end": "2026-03-14 02:00:00 +0000"},
+          {"date": "2026-03-14 02:00:00 +0000", "Avg": 58, "Min": 52, "Max": 65, "source": "Simon's Apple Watch", "start": "2026-03-14 02:00:00 +0000", "end": "2026-03-14 03:00:00 +0000"},
+          {"date": "2026-03-14 03:00:00 +0000", "Avg": 61, "Min": 56, "Max": 68, "source": "Simon's Apple Watch", "start": "2026-03-14 03:00:00 +0000", "end": "2026-03-14 04:00:00 +0000"},
+          {"date": "2026-03-14 04:00:00 +0000", "Avg": 63, "Min": 59, "Max": 72, "source": "Simon's Apple Watch", "start": "2026-03-14 04:00:00 +0000", "end": "2026-03-14 05:00:00 +0000"}
+        ]
+      },
+      {
+        "name": "step_count",
+        "units": "count",
+        "data": [
+          {"date": "2026-03-14 09:00:00 +0000", "qty": 1234, "source": "Simon's iPhone", "start": "2026-03-14 09:00:00 +0000", "end": "2026-03-14 10:00:00 +0000"},
+          {"date": "2026-03-14 10:00:00 +0000", "qty": 2345, "source": "Simon's iPhone", "start": "2026-03-14 10:00:00 +0000", "end": "2026-03-14 11:00:00 +0000"},
+          {"date": "2026-03-14 11:00:00 +0000", "qty": 3456, "source": "Simon's iPhone", "start": "2026-03-14 11:00:00 +0000", "end": "2026-03-14 12:00:00 +0000"},
+          {"date": "2026-03-14 12:00:00 +0000", "qty": 1111, "source": "Simon's iPhone", "start": "2026-03-14 12:00:00 +0000", "end": "2026-03-14 13:00:00 +0000"},
+          {"date": "2026-03-14 13:00:00 +0000", "qty": 987,  "source": "Simon's iPhone", "start": "2026-03-14 13:00:00 +0000", "end": "2026-03-14 14:00:00 +0000"}
+        ]
+      },
+      {
+        "name": "resting_heart_rate",
+        "units": "count/min",
+        "data": [
+          {"date": "2026-03-14 00:00:00 +0000", "qty": 52, "source": "Simon's Apple Watch", "start": "2026-03-14 00:00:00 +0000", "end": "2026-03-14 23:59:59 +0000"},
+          {"date": "2026-03-13 00:00:00 +0000", "qty": 54, "source": "Simon's Apple Watch", "start": "2026-03-13 00:00:00 +0000", "end": "2026-03-13 23:59:59 +0000"},
+          {"date": "2026-03-12 00:00:00 +0000", "qty": 53, "source": "Simon's Apple Watch", "start": "2026-03-12 00:00:00 +0000", "end": "2026-03-12 23:59:59 +0000"}
+        ]
+      }
+    ],
+    "workouts": [
+      {
+        "id": "CFC954D6-AAAA-BBBB-CCCC-DDDDDDDDDDDD",
+        "name": "Outdoor Run",
+        "start": "2026-03-10 19:27:48 +0000",
+        "end": "2026-03-10 20:13:23 +0000",
+        "duration": 2735.044116973877,
+        "distance": {"qty": 3.1537, "units": "km"},
+        "activeEnergyBurned": {"qty": 694.66, "units": "kJ"},
+        "avgHeartRate": {"qty": 170.27, "units": "count/min"},
+        "maxHeartRate": {"qty": 184.0, "units": "count/min"},
+        "location": "Outdoor",
+        "isIndoor": false
+      },
+      {
+        "id": "AB123456-EEEE-FFFF-0000-111111111111",
+        "name": "Indoor Cycling",
+        "start": "2026-03-11 07:15:00 +0000",
+        "end": "2026-03-11 08:00:00 +0000",
+        "duration": 2700.0,
+        "distance": {"qty": 18.4, "units": "km"},
+        "activeEnergyBurned": {"qty": 512.0, "units": "kJ"},
+        "location": "Indoor",
+        "isIndoor": true
+      }
+    ]
+  }
+}
