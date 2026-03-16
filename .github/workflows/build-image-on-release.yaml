@@ -35,7 +35,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/a7d-corp/apple-health-ingester:${{ github.event.release.tag_name }}
-            ghcr.io/a7d-corp/apple-health-ingester:latest
+            ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }}
+            ghcr.io/${{ github.repository }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
