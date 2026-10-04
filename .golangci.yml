@@ -1,0 +1,6 @@
+version: "2"
+linters:
+  exclusions:
+    presets:
+      # Don't flag unchecked errors from Close() and similar std calls.
+      - std-error-handling
