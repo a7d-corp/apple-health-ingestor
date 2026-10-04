@@ -1,0 +1,35 @@
+# Turnkey stack: the ingestor plus a fresh InfluxDB 2.x.
+# If you already run InfluxDB, delete the influxdb service and point INFLUX_URL at it.
+# Put a TLS-terminating reverse proxy (e.g. Caddy) in front of port 8080.
+services:
+  influxdb:
+    image: influxdb:2
+    restart: unless-stopped
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB_ADMIN_USER}
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB_ADMIN_PASSWORD}
+      DOCKER_INFLUXDB_INIT_ORG: ${INFLUX_ORG}
+      DOCKER_INFLUXDB_INIT_BUCKET: ${INFLUX_BUCKET}
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUX_TOKEN}
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+      - influxdb-config:/etc/influxdb2
+
+  ingestor:
+    image: ghcr.io/a7d-corp/apple-health-ingestor:latest
+    restart: unless-stopped
+    depends_on:
+      - influxdb
+    environment:
+      INGEST_TOKEN: ${INGEST_TOKEN}
+      INFLUX_URL: http://influxdb:8086
+      INFLUX_TOKEN: ${INFLUX_TOKEN}
+      INFLUX_ORG: ${INFLUX_ORG}
+      INFLUX_BUCKET: ${INFLUX_BUCKET}
+    ports:
+      - "8080:8080"
+
+volumes:
+  influxdb-data:
+  influxdb-config:
