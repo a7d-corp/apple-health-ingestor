@@ -65,6 +65,7 @@ Listens on `:8080`, plain HTTP.
   Missing/wrong token → `401`.
 - Body limited to `MAX_BODY_BYTES` (default 100 MB) → `413` when exceeded.
 - Malformed JSON → `400`.
+- Body read timeout → `408`.
 - Success → `200` with JSON body `{"written": N, "skipped": M}`.
 - InfluxDB write failure → `5xx`, so HAE retries the request.
 - Response is sent only after all points are written (blocking writes,

@@ -129,3 +129,24 @@ func TestIngestCountsSkips(t *testing.T) {
 		t.Errorf("body = %s, want %s", rec.Body, want)
 	}
 }
+
+type timeoutError struct{}
+
+func (timeoutError) Error() string   { return "i/o timeout" }
+func (timeoutError) Timeout() bool   { return true }
+func (timeoutError) Temporary() bool { return true }
+
+type timeoutReader struct{}
+
+func (timeoutReader) Read([]byte) (int, error) { return 0, timeoutError{} }
+
+func TestIngestBodyReadTimeout(t *testing.T) {
+	w := &fakeWriter{}
+	rec := do(t, newHandler(w, 1<<20), http.MethodPost, "/ingest", "Bearer "+token, timeoutReader{})
+	if rec.Code != http.StatusRequestTimeout {
+		t.Errorf("status = %d, want 408", rec.Code)
+	}
+	if w.calls != 0 {
+		t.Errorf("writer called %d times, want 0", w.calls)
+	}
+}

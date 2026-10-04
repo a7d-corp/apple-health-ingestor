@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"log/slog"
+	"net"
 	"net/http"
 	"time"
 
@@ -55,6 +56,12 @@ func (h *ingestHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if errors.As(err, &tooLarge) {
 			h.log.Warn("request body too large", "limit", h.maxBodyBytes)
 			http.Error(w, "request body too large", http.StatusRequestEntityTooLarge)
+			return
+		}
+		var netErr net.Error
+		if errors.As(err, &netErr) && netErr.Timeout() {
+			h.log.Warn("timed out reading request body", "error", err)
+			http.Error(w, "request timeout", http.StatusRequestTimeout)
 			return
 		}
 		h.log.Warn("malformed payload", "error", err)

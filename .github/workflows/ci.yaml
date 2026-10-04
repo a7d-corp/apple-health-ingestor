@@ -17,6 +17,8 @@ jobs:
           go-version-file: go.mod
       - run: go vet ./...
       - uses: golangci/golangci-lint-action@v9
+        with:
+          args: --build-tags integration
       - run: go test ./...
 
   integration:

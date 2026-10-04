@@ -1,6 +1,8 @@
 # Turnkey stack: the ingestor plus a fresh InfluxDB 2.x.
 # If you already run InfluxDB, delete the influxdb service and point INFLUX_URL at it.
-# Put a TLS-terminating reverse proxy (e.g. Caddy) in front of port 8080.
+# Port 8080 is bound to localhost only, for a TLS-terminating reverse proxy
+# (e.g. Caddy) running on the host. Proxies running in containers should join
+# the compose network instead.
 services:
   influxdb:
     image: influxdb:2
@@ -28,7 +30,7 @@ services:
       INFLUX_ORG: ${INFLUX_ORG}
       INFLUX_BUCKET: ${INFLUX_BUCKET}
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
 
 volumes:
   influxdb-data:

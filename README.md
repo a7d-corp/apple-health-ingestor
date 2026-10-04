@@ -11,7 +11,7 @@ Receives health metrics from the iOS app [Health Auto Export](https://www.health
 | `GET` | `/healthz` | none | Liveness (does not check InfluxDB) |
 
 `/ingest` responds `200 {"written":N,"skipped":M}`, `401` for a bad token, `400` for
-malformed JSON, `413` when the body exceeds `MAX_BODY_BYTES`, and `503` when InfluxDB
+malformed JSON, `408` when reading the body times out, `413` when the body exceeds `MAX_BODY_BYTES`, and `503` when InfluxDB
 rejects the write (Health Auto Export will retry).
 
 ## Configuration
@@ -36,6 +36,8 @@ docker run -d --name apple-health-ingestor -p 8080:8080 \
   ghcr.io/a7d-corp/apple-health-ingestor:latest
 ```
 
+`latest` is published from the first `v*` release; `:main` tracks the main branch.
+
 ### Docker Compose (ingestor + InfluxDB)
 
 ```bash
@@ -53,7 +55,7 @@ The service does not terminate TLS. Put a reverse proxy in front of it, e.g. Cad
 
 ```
 health.example.com {
-	reverse_proxy apple-health-ingestor:8080
+	reverse_proxy localhost:8080
 }
 ```
 
