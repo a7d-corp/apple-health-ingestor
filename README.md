@@ -43,8 +43,9 @@ cp .env.example .env   # edit the values
 docker compose up -d
 ```
 
-If you already run InfluxDB, remove the `influxdb` service from `docker-compose.yml`
-and set `INFLUX_URL` to your instance.
+If you already run InfluxDB, edit `docker-compose.yml`:
+delete the `influxdb` service and its volumes, remove the ingestor service's `depends_on`,
+and change the ingestor service's `INFLUX_URL` to your instance.
 
 ### TLS
 
@@ -64,6 +65,7 @@ Create a **REST API** automation in Health Auto Export:
 - **Headers:** `Authorization` = `Bearer <INGEST_TOKEN>`
 - **Data type:** Health Metrics (other data types are ignored)
 - **Export format:** JSON
+- **Date format:** timestamps must be in `yyyy-MM-dd HH:mm:ss Z` format (e.g. `2025-12-15 09:00:10 +0000`, as in [`testdata/sample-data.json`](testdata/sample-data.json)); entries with other formats are skipped and logged.
 
 For historical imports, export in date-range batches rather than one huge request.
 An example of what Health Auto Export sends is in [`testdata/sample-data.json`](testdata/sample-data.json).
